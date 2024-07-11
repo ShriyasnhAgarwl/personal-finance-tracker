@@ -1,2 +1,3 @@
 import LandingPage from "./LandingPage";
-export { LandingPage };
+import Auth from "./Auth";
+export { LandingPage, Auth };

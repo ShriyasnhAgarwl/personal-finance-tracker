@@ -1,11 +1,12 @@
-import { HomePage } from "./pages";
+import { HomePage, AuthPage } from "./pages";
 import { Suspense } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 function App() {
   return (
-    <div className="App">
+    <div className="App font-['poppins']">
       <Routes>
         <Route path="/" element={<Page page={<HomePage />} />}></Route>
+        <Route path="/auth" element={<Page page={<AuthPage />} />}></Route>
         <Route
           path="*"
           element={

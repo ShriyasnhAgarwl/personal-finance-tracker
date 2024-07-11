@@ -1,3 +1,4 @@
 import { lazy } from "react";
 const HomePage = lazy(() => import("./Home"));
-export { HomePage };
+const AuthPage = lazy(() => import("./Auth.page"));
+export { HomePage, AuthPage };
