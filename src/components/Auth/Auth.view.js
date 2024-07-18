@@ -5,15 +5,23 @@ function AuthView(props) {
     <>
       {props.authMethod === "signup" && (
         <div
-          className=" relative flex flex-col justify-center items-center h-screen"
+          className="relative flex flex-col justify-center items-center h-screen"
           style={{ backgroundImage: "url('../images/authBackground.jpg')" }}
         >
           <div className="absolute inset-0 bg-black opacity-30"></div>
           <h2 className="text-3xl text-white font-bold mb-8 z-10">Sign Up</h2>
-          <form
-            onSubmit={props.handleSignUp}
-            className="bg-white p-8 rounded-lg shadow-lg z-10"
-          >
+          <div className="bg-white p-8 rounded-lg shadow-lg z-10">
+            {props.message && (
+              <div
+                className={`mb-4 p-2 rounded ${
+                  props.message.type === "success"
+                    ? "bg-green-500"
+                    : "bg-red-500"
+                } text-white`}
+              >
+                {props.message.text}
+              </div>
+            )}
             <div className="mb-4">
               <label className="block mb-2 text-sm font-bold text-gray-700">
                 Name
@@ -75,7 +83,7 @@ function AuthView(props) {
               />
             </div>
             <button
-              type="submit"
+              onClick={props.handleSignUp}
               className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
             >
               Sign Up
@@ -90,7 +98,7 @@ function AuthView(props) {
                 Sign In
               </button>
             </p>
-          </form>
+          </div>
         </div>
       )}
       {props.authMethod === "signin" && (
@@ -100,10 +108,18 @@ function AuthView(props) {
         >
           <div className="absolute inset-0 bg-black opacity-30"></div>
           <h2 className="text-3xl text-white font-bold mb-8 z-10">Sign In</h2>
-          <form
-            onSubmit={props.handleSignIn}
-            className="bg-white p-8 rounded-lg shadow-lg z-10"
-          >
+          <div className="bg-white p-8 rounded-lg shadow-lg z-10">
+            {props.message && (
+              <div
+                className={`mb-4 p-2 rounded ${
+                  props.message.type === "success"
+                    ? "bg-green-500"
+                    : "bg-red-500"
+                } text-white`}
+              >
+                {props.message.text}
+              </div>
+            )}
             <div className="mb-4">
               <label className="block mb-2 text-sm font-bold text-gray-700">
                 Email
@@ -129,7 +145,7 @@ function AuthView(props) {
               />
             </div>
             <button
-              type="submit"
+              onClick={props.handleSignIn}
               className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
             >
               Sign In
@@ -144,7 +160,7 @@ function AuthView(props) {
                 Sign Up
               </button>
             </p>
-          </form>
+          </div>
         </div>
       )}
     </>

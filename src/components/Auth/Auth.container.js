@@ -1,28 +1,65 @@
 import AuthView from "./Auth.view";
 import { useState } from "react";
-function AuthContainer(props) {
+import axios from "axios";
+
+function AuthContainer() {
   const [authMethod, setAuthMethod] = useState("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
+  const [message, setMessage] = useState(null);
 
-  const handleSignUp = (event) => {
-    event.preventDefault();
-    // Handle sign-up logic here
-    console.log("Sign Up", { email, password });
+  const handleSignUp = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/signup",
+        {
+          email,
+          password,
+          phoneNumber,
+          name,
+          country,
+        }
+      );
+      setMessage({ type: "success", text: response?.data?.message });
+    } catch (error) {
+      console.log(error);
+      setMessage({ type: "error", text: error?.response?.data?.message });
+    } finally {
+      clearMessageAfterTimeout();
+    }
   };
+  // console.log(message);
 
-  const handleSignIn = (event) => {
-    event.preventDefault();
-    // Handle sign-in logic here
-    console.log("Sign In", { email, password });
+  const handleSignIn = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/signin",
+        {
+          email,
+          password,
+        }
+      );
+      setMessage({ type: "success", text: response.data.message });
+    } catch (error) {
+      setMessage({ type: "error", text: error.response.data.message });
+    } finally {
+      clearMessageAfterTimeout();
+    }
   };
 
   const toggleAuthMethod = () => {
     setAuthMethod(authMethod === "signin" ? "signup" : "signin");
   };
+
+  const clearMessageAfterTimeout = () => {
+    setTimeout(() => {
+      setMessage(null);
+    }, 5000);
+  };
+
   return (
     <AuthView
       authMethod={authMethod}
@@ -40,6 +77,7 @@ function AuthContainer(props) {
       handleSignUp={handleSignUp}
       handleSignIn={handleSignIn}
       toggleAuthMethod={toggleAuthMethod}
+      message={message}
     />
   );
 }
