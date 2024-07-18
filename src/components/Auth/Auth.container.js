@@ -42,7 +42,6 @@ function AuthContainer() {
           password,
         }
       );
-      console.log(response);
       setMessage({ type: "success", text: response.data.message });
     } catch (error) {
       setMessage({ type: "error", text: error.response.data.message });
