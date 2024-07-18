@@ -68,7 +68,7 @@ function AuthContainer() {
       setEmail={setEmail}
       password={password}
       setPassword={setPassword}
-      phoneNumber={phoneNumber} // Ensure this matches your schema
+      phoneNumber={phoneNumber}
       setPhoneNumber={setPhoneNumber}
       name={name}
       setName={setName}
